@@ -43,7 +43,7 @@ namespace FixAholaPunchTimes
         ComboEmployeeDataSet TheComboEmployeeDataSet = new ComboEmployeeDataSet();
         FindEmployeeByEmployeeIDDataSet TheFindEmployeeByEmployeeIDDataSet = new FindEmployeeByEmployeeIDDataSet();
         FindAholaEmployeePunchHoursDataSet TheFindAholoaEmployeeHoursDataSet = new FindAholaEmployeePunchHoursDataSet();
-        FindAholaClockPunchesForEmployeeDayDataSet TheFindAholaClockPunchesForEmployeeDayDataSet = new FindAholaClockPunchesForEmployeeDayDataSet();
+        public static FindAholaClockPunchesForEmployeeDayDataSet TheFindAholaClockPunchesForEmployeeDayDataSet = new FindAholaClockPunchesForEmployeeDayDataSet();
 
         DateTime gdatStartDate;
         DateTime gdatEndDate;
@@ -104,7 +104,10 @@ namespace FixAholaPunchTimes
 
                 TheFindAholaClockPunchesForEmployeeDayDataSet = TheEmployeePunchedHoursClass.FindAholaClockPunchesForEmployeeDay(gintEmployeeID, gdatStartDate, gdatEndDate);
 
-                dgrPunches.ItemsSource = TheFindAholaClockPunchesForEmployeeDayDataSet.FindAholaClockPunchesForEmployeeDay;
+                dgrPunches.ItemsSource = TheFindAholoaEmployeeHoursDataSet.FindAholaEmployeePunchHours;
+
+                ShowAholaClockPunches ShowAholaClockPunches = new ShowAholaClockPunches();
+                ShowAholaClockPunches.Show();
             }
             catch (Exception Ex)
             {
@@ -181,6 +184,11 @@ namespace FixAholaPunchTimes
             {
                 gintEmployeeID = TheComboEmployeeDataSet.employees[intSelectedIndex].EmployeeID;
             }
+        }
+
+        private void expResetControls_Expanded(object sender, RoutedEventArgs e)
+        {
+            ResetControl();
         }
     }
 }
